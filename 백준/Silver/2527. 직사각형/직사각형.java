@@ -1,3 +1,4 @@
+
 import java.io.*;
 import java.util.*;
 
@@ -12,34 +13,34 @@ public class Main {
         for (int tc = 1; tc <= 4; tc++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
             
-            // 첫번째 직사각형 좌표
-            int x1 = Integer.parseInt(st.nextToken());
-            int y1 = Integer.parseInt(st.nextToken());
-            int x3 = Integer.parseInt(st.nextToken());
-            int y3 = Integer.parseInt(st.nextToken());
+            // 첫번째 직사각형 A의 좌표
+            int A_x1 = Integer.parseInt(st.nextToken());
+            int A_y1 = Integer.parseInt(st.nextToken());
+            int A_x2 = Integer.parseInt(st.nextToken());
+            int A_y2 = Integer.parseInt(st.nextToken());
             
-            // 두번째 직사각형 좌표
-            int x2 = Integer.parseInt(st.nextToken());
-            int y2 = Integer.parseInt(st.nextToken());
-            int x4 = Integer.parseInt(st.nextToken());
-            int y4 = Integer.parseInt(st.nextToken());
+            // 두번째 직사각형 B의 좌표
+            int B_x1 = Integer.parseInt(st.nextToken());
+            int B_y1 = Integer.parseInt(st.nextToken());
+            int B_x2 = Integer.parseInt(st.nextToken());
+            int B_y2 = Integer.parseInt(st.nextToken());
             
-            // 공통부분이 없는 경우 (x1 > x4 or x3 < x2 or y1 > y4 or y3 < y2)
-            if (x3 < x2 || x4 < x1 || y3 < y2 || y4 < y1) {
-                sb.append("d\n");
+            // 공통부분이 없는 경우 : d 출력
+            if (A_x2 < B_x1 || B_x2 < A_x1 || A_y2 < B_y1 || B_y2 < A_y1) {
+                sb.append("d").append("\n");
             } 
-            // 점에서 만나는 경우
-            else if ((x3 == x2 && y3 == y2) || (x3 == x2 && y1 == y4) ||
-                     (x1 == x4 && y3 == y2) || (x1 == x4 && y1 == y4)) {
-                sb.append("c\n");
+            // 점에서 만나는 경우 : c 출력
+            else if ((A_x2 == B_x1 && A_y2 == B_y1) || (A_x2 == B_x1 && A_y1 == B_y2) ||
+                     (A_x1 == B_x2 && A_y2 == B_y1) || (A_x1 == B_x2 && A_y1 == B_y2)) {
+                sb.append("c").append("\n");
             } 
-            // 선분에서 만나는 경우
-            else if (x3 == x2 || x1 == x4 || y3 == y2 || y1 == y4) {
-                sb.append("b\n");
+            // 선분에서 만나는 경우 : b 출력
+            else if (A_x2 == B_x1 || A_x1 == B_x2 || A_y2 == B_y1 || A_y1 == B_y2) {
+                sb.append("b").append("\n");
             } 
-            // 직사각형이 겹치는 경우
+            // 직사각형이 겹치는 경우 : a 출력
             else {
-                sb.append("a\n");
+                sb.append("a").append("\n");
             }
         }
         
