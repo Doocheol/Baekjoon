@@ -74,7 +74,7 @@ public class Main {
 
         for (int i = 0; i < N; i++) {
             sb.append(arr[i]);
-            if ((i + 1) % 20 == 0 || i == N - 1) {
+            if ((i + 1) % 20 == 0) {
                 sb.append("\n");
             } else {
                 sb.append(" ");
