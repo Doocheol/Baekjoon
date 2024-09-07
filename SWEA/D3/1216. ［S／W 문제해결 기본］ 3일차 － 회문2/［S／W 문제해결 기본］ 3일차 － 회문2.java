@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
@@ -7,6 +8,7 @@ public class Solution {
 
 	public static void main(String[] args) throws Exception {
 		
+	//	System.setIn(new FileInputStream("A018.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 		StringBuilder sb = new StringBuilder();
@@ -26,7 +28,7 @@ public class Solution {
 			
 			//행 탐색
 			for (int row = 0; row < 100; row++) {
-				for (int start = 0; start < N; start++) {
+				for (int start = 0; start < 100; start++) {
 					for (int end = 99; end > start; end--) {
 						if (checkRow(board, start, end, row)) {
 							maxLength = Math.max(maxLength, end - start + 1);
@@ -46,7 +48,6 @@ public class Solution {
 				}
 			}
 			sb.append("#").append(N).append(" ").append(maxLength).append("\n");
-			
 		} // End tc
 		bw.write(sb.toString());
 		bw.flush();
@@ -66,7 +67,7 @@ public class Solution {
 			end--;
 		}
 		
-		return false;
+		return true;
 	}
 	
 	private static boolean checkColumn(char[][] arr, int start, int end, int column) {
@@ -81,7 +82,7 @@ public class Solution {
 			end--;
 		}
 		
-		return false;
+		return true;
 	}
 	
 } // End class
