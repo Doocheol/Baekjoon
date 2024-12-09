@@ -1,39 +1,57 @@
 import java.util.*;
+import java.io.*;
 
 class Solution {
     public int[] solution(int N, int[] stages) {
-        Map<Integer, Double> map = new HashMap<>();
-
+        
+        int[] stageCount = new int[N+2];
+        for (int stage : stages) {
+            stageCount[stage]++;
+        }
+        
+        int players = stages.length;
+        List<StageFailure> failures = new ArrayList<>();
+        
         for (int i = 1; i <= N; i++) {
-            double total = 0;
-            double fail = 0;
-
-            for (int j = 0; j < stages.length; j++) {
-                if (i <= stages[j]) total++;
-                if (i == stages[j]) fail++;
+            if (players == 0) {
+                failures.add(new StageFailure(i, 0.0));
+                continue;
             }
-
-            if (total == 0 && fail == 0) {
-                total = 1;
-            }
-            map.put(i, fail / total);
+            
+            double failureRate = (double) stageCount[i] / players;
+            failures.add(new StageFailure(i, failureRate));
+            players -= stageCount[i];
         }
-
-        int[] answer = new int[N];
-        for (int i = 0; i < N; i++) {
-            double max = -1;
-            int rKey = 0;
-
-            for (int key : map.keySet()) {
-                if (max < map.get(key)) {
-                    max = map.get(key);
-                    rKey = key;
-                }
-            }
-            answer[i] = rKey;
-            map.remove(rKey);
+        
+        Collections.sort(failures);
+        
+        // failures.sort((a, b) -> {
+        //     if (b.failureRate != a.failureRate) {
+        //         return Double.compare(b.failureRate, a.failureRate);
+        //     }
+        //     return Integer.compare(a.stage, b.stage);
+        // });
+            
+            return failures.stream().mapToInt(f -> f.stage).toArray();
+    
+    }
+    
+    static class StageFailure implements Comparable<StageFailure> {
+        int stage;
+        double failureRate;
+        
+        public StageFailure(int stage, double failureRate) {
+            this.stage = stage;
+            this.failureRate = failureRate;
         }
-
-        return answer;
+        
+        @Override
+        public int compareTo(StageFailure o) {
+            if (o.failureRate != this.failureRate) {
+                return Double.compare(o.failureRate, this.failureRate);
+            }
+            return Integer.compare(this.stage, o.stage);
+            
+        }
     }
 }
