@@ -1,23 +1,28 @@
+import java.util.*;
+import java.io.*;
+
 class Solution {
     public int[][] solution(int[][] arr1, int[][] arr2) {
         
-        // 행렬의 곱셈 (N * M) * (I * J) -> N * J
+        int r1 = arr1.length;
+        int c1 = arr1[0].length;
         
-        int row1 = arr1.length;
-        int col1 = arr1[0].length;
-        int row2 = arr2.length;
-        int col2 = arr2[0].length;
+        int r2 = arr2.length;
+        int c2 = arr2[0].length;
         
-        int[][] answer = new int[row1][col2];
+        int[][] answer = new int[r1][c2];
         
-        for (int i = 0; i < row1; i++) {
-            for (int j = 0; j < col2; j++) {
-                for (int k = 0; k < col1; k++) {
+        for (int i = 0; i < r1; i++) {
+            for (int j = 0; j < c2; j++) {
+                for (int k = 0; k < c1; k++) {
                     answer[i][j] += arr1[i][k] * arr2[k][j];
                 }
             }
         }
         
         return answer;
+        
+        // int[][] answer = {};
+        // return answer;
     }
 }
