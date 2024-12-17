@@ -4,8 +4,9 @@ import java.io.*;
 class Solution {
     
     private static class Node {
-        int x, y, num;
+        int num, x, y;
         Node left, right;
+        
         public Node(int num, int x, int y) {
             this.num = num;
             this.x = x;
@@ -69,6 +70,7 @@ class Solution {
     }
     
     public int[][] solution(int[][] nodeinfo) {
+        
         Node root = makeBT(nodeinfo);
         ArrayList<Integer> preOrderList = new ArrayList<>();
         preOrder(root, preOrderList);
@@ -78,8 +80,8 @@ class Solution {
         int[][] answer = new int[2][nodeinfo.length];
         answer[0] = preOrderList.stream().mapToInt(Integer::intValue).toArray();
         answer[1] = postOrderList.stream().mapToInt(Integer::intValue).toArray();
-        
         return answer;
+
     
     
     }
