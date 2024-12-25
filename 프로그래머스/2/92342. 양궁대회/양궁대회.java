@@ -15,17 +15,18 @@ class Solution {
     
     private static void calculateDiff(int[] ryan) {
         int score = getScore(ryan);
+        
         if (max < score) {
             max = score;
             answer = ryan.clone();
         }
-        else if (max > 0 && max == score) {
-            for (int i = 10; i >= 0; i--) {
+        else if (max == score && max > 0) {
+            for (int i = 10; i>=0; i--) {
                 if (answer[i] != ryan[i]) {
                     if (answer[i] < ryan[i]) {
-                        answer = ryan.clone();
+                                            answer = ryan.clone();
                     }
-                    break;
+                                    break;
                 }
             }
         }
@@ -36,7 +37,6 @@ class Solution {
             calculateDiff(ryan);
             return;
         }
-        
         for (int i = idx; i <= 10; i++) {
             int cnt = Math.min(n, apeach[i] + 1);
             ryan[i] = cnt;
@@ -51,7 +51,7 @@ class Solution {
         apeach = info;
         max = 0;
         backtrack(n, 0, new int[11]);
-        return max == 0 ? new int[]{-1} : answer;
         
+        return max == 0 ? new int[]{-1} : answer;
     }
 }
