@@ -1,23 +1,21 @@
 import java.util.*;
+import java.io.*;
 
 class Solution {
     public String[] solution(String[] s) {
+
         String[] answer = new String[s.length];
         
-        
-        
         for (int i = 0; i < s.length; i++) {
+            StringBuilder start = new StringBuilder();
             ArrayDeque<Character> stack = new ArrayDeque<>();
-            StringBuilder start = new StringBuilder();  
             char[] end = s[i].toCharArray();
-            
             for (char c : end) {
                 stack.push(c);
                 if (stack.size() >= 3) {
                     char s3 = stack.pop();
                     char s2 = stack.pop();
                     char s1 = stack.pop();
-                    
                     if (("" + s1 + s2 + s3).equals("110")) {
                         start.append("110");
                     }
@@ -30,11 +28,9 @@ class Solution {
             }
             
             StringBuilder ans = new StringBuilder();
-            
             while (!stack.isEmpty()) {
                 ans.append(stack.pollLast());
             }
-            
             if (ans.indexOf("11") >= 0) {
                 ans.insert(ans.indexOf("11"), start);
             }
@@ -44,15 +40,10 @@ class Solution {
             else {
                 ans.insert(0, start);
             }
-            
             answer[i] = ans.toString();
-
         }
-        
-            
-    
-        
-        
         return answer;
+        
+    
     }
 }
