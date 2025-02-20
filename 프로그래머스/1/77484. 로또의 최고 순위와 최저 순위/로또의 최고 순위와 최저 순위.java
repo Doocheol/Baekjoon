@@ -6,6 +6,7 @@ class Solution {
         for (int winNum : win_nums) {
             win.add(winNum);
         }
+        
         int zero = 0, match = 0;
         for (int lotto : lottos) {
             if (lotto == 0) zero++;
@@ -13,6 +14,6 @@ class Solution {
         }
         
         return new int[]{7 - Math.max((match + zero), 1), 7 - Math.max(match, 1)};
-        
+    
     }
 }
