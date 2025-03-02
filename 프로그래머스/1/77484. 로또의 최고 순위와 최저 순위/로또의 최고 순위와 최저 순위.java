@@ -7,13 +7,13 @@ class Solution {
             win.add(winNum);
         }
         
-        int zero = 0, match = 0;
+        int zeroNum = 0, match = 0;
         for (int lotto : lottos) {
-            if (lotto == 0) zero++;
+            if (lotto == 0) zeroNum++;
             else if (win.contains(lotto)) match++;
         }
         
-        return new int[]{7 - Math.max((match + zero), 1), 7 - Math.max(match, 1)};
+        return new int[]{7 - Math.max((match + zeroNum), 1), 7 - Math.max(match, 1)};
     
     }
 }
